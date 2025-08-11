@@ -1,21 +1,17 @@
-def coin_change(coins, amount):
-    """
-    حساب عدد الطرق المختلفة لتكوين المبلغ 'amount' باستخدام العملات المتوفرة في 'coins'.
-    يستخدم البرمجة الديناميكية لبناء الحل.
-    """
-    # dp[i] = عدد الطرق لتكوين المبلغ i
-    dp = [0] * (amount + 1)
-    dp[0] = 1  # طريقة واحدة فقط لتكوين المبلغ 0 (عدم استخدام أي عملة)
+def LIS_length(arr):
+    n = len(arr)
+    dp = [1] * n  # dp[i] = طول LIS الذي ينتهي عند i
 
-    for coin in coins:
-        for x in range(coin, amount + 1):
-            dp[x] += dp[x - coin]
+    for i in range(n):
+        for j in range(i):
+            if arr[j] < arr[i]:
+                dp[i] = max(dp[i], dp[j] + 1)
 
-    return dp[amount]
-
+    return dp, max(dp)
 
 if __name__ == "__main__":
-    coins = [1, 2, 5]
-    amount = 11
-    ways = coin_change(coins, amount)
-    print(f"Number of ways to make amount {amount} with coins {coins}: {ways}")
+    arr = [23, 4, 1, 2, 3, 1]
+    dp, max_len = LIS_length(arr)
+
+    print("DP table:", dp)
+    print("Length of LIS:", max_len)
