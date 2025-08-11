@@ -1,17 +1,17 @@
-# Dynamic Programming: Coin Change Problem
+# Longest Increasing Subsequence (LIS) - Dynamic Programming
 
 ## Overview
-This project demonstrates a dynamic programming solution for the classic Coin Change problem:  
-**Given an amount and a set of coin denominations, find the number of ways to make up that amount using the coins.**
+This project implements the Longest Increasing Subsequence problem using a bottom-up Dynamic Programming approach with **O(n²)** time complexity.
 
-Dynamic Programming (DP) is an optimization technique that solves complex problems by breaking them down into simpler subproblems and storing the results of subproblems to avoid redundant computations.
+The LIS problem:  
+> Given an array, find the length of the longest subsequence of elements in increasing order.
 
-## How the solution works
-- Create a DP array `dp` of size `amount + 1`.
-- Initialize `dp[0] = 1` since there is exactly one way to make amount 0 — by choosing no coins.
-- Iterate over each coin and update the `dp` array for amounts that can be reached using that coin.
-- The value `dp[amount]` at the end will be the total number of ways to form the amount.
+## Algorithm
+1. Create a DP array where `dp[i]` stores the length of the LIS ending at index `i`.
+2. Initialize all values of `dp` to 1 (each element alone is an LIS of length 1).
+3. For each index `i`, check all previous indices `j < i`:
+   - If `arr[j] < arr[i]`, update `dp[i] = max(dp[i], dp[j] + 1)`.
+4. The result is `max(dp)`.
 
-## Usage
-Run the Python script to see the number of ways to make a given amount using the specified coins.
-
+## Time Complexity
+- **O(n²)** due to the nested loops.
